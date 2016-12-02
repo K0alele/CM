@@ -1,0 +1,7 @@
+#Fri Nov 18 11:36:11 GMT 2016
+base.0=C\:\\Users\\Diogo\\Documents\\AndroidStudio\\LibGDX\\android\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_55e24781436425e82325d7cc11415fb4211cf486
+renamed.1=classes2.dex
+renamed.0=classes.dex
+file.1=C\:\\Users\\Diogo\\Documents\\AndroidStudio\\LibGDX\\android\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_5562a9e0b72accf08478fced421ff463e09613b6\\classes.dex
+base.1=C\:\\Users\\Diogo\\Documents\\AndroidStudio\\LibGDX\\android\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_5562a9e0b72accf08478fced421ff463e09613b6
+file.0=C\:\\Users\\Diogo\\Documents\\AndroidStudio\\LibGDX\\android\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_55e24781436425e82325d7cc11415fb4211cf486\\classes.dex

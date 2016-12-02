@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="C:\Users\Diogo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx\1.9.4\4b4b7962d1bc75af0438f5c81ec1010557bc9ee5\gdx-1.9.4.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="4b4b7962d1bc75af0438f5c81ec1010557bc9ee5">
+        <dex dex="C:\Users\Diogo\Documents\AndroidStudio\LibGDX\android\build\intermediates\transforms\dex\debug\folders\1000\10\gdx-1.9.4_1ea510f77f1e9512a425ae3931990416fa2f06ce\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Diogo\Documents\AndroidStudio\LibGDX\android\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="ad7f6961b642144118f0ec5ec979e7710007405e">
+        <dex dex="C:\Users\Diogo\Documents\AndroidStudio\LibGDX\android\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_5562a9e0b72accf08478fced421ff463e09613b6\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Diogo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-box2d\1.9.4\98a0d25c9f0637fecac6e4aacf7287aa635964f5\gdx-box2d-1.9.4.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="98a0d25c9f0637fecac6e4aacf7287aa635964f5">
+        <dex dex="C:\Users\Diogo\Documents\AndroidStudio\LibGDX\android\build\intermediates\transforms\dex\debug\folders\1000\10\gdx-box2d-1.9.4_f9cbaac0256f9f7d1b76c48723c344105d9ccd79\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Diogo\.gradle\caches\modules-2\files-2.1\com.badlogicgames.gdx\gdx-backend-android\1.9.4\194b33382d6d58fad031521ba3331d926c476c9b\gdx-backend-android-1.9.4.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="194b33382d6d58fad031521ba3331d926c476c9b">
+        <dex dex="C:\Users\Diogo\Documents\AndroidStudio\LibGDX\android\build\intermediates\transforms\dex\debug\folders\1000\10\gdx-backend-android-1.9.4_a98da5e2b9f5b8fcce5a2b077ccfa8ade182e367\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Diogo\Documents\AndroidStudio\LibGDX\android\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.3"
+        sha1="65c893570f3a12f25cd715c35d29a41a8a4fb45a">
+        <dex dex="C:\Users\Diogo\Documents\AndroidStudio\LibGDX\android\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_55e24781436425e82325d7cc11415fb4211cf486\classes.dex" />
+    </item>
+
+</items>
