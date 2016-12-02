@@ -64,7 +64,7 @@ public class PlayScreen implements Screen {
 
         gameCam.position.set(gamePort.getWorldWidth()/2, gamePort.getWorldHeight()/2,0);
 
-        world = new World(new Vector2(0,-10),true);
+        world = new World(new Vector2(0,-100),true);
         debugRenderer = new Box2DDebugRenderer();
 
         BodyDef bDef = new BodyDef();
@@ -124,8 +124,6 @@ public class PlayScreen implements Screen {
     {
         handleInput(dt);
 
-        world.step(1/60, 6,2);
-
         gameCam.position.x = player1.b2Body.getPosition().x;
 
         gameCam.update();
@@ -135,10 +133,11 @@ public class PlayScreen implements Screen {
 
     private void handleInput(float dt)
     {
-        if (Gdx.input.isKeyJustPressed(com.badlogic.gdx.Input.Keys.UP))
-            player1.b2Body.applyLinearImpulse(new Vector2(0,4f),player1.b2Body.getWorldCenter(),true);
+        player1.b2Body.applyLinearImpulse(new Vector2(5000f,0),player1.b2Body.getWorldCenter(),true);
         if (Gdx.input.isKeyJustPressed(com.badlogic.gdx.Input.Keys.RIGHT) && player1.b2Body.getLinearVelocity().x <= 2)
-            player1.b2Body.applyLinearImpulse(new Vector2(0.1f,0),player1.b2Body.getWorldCenter(),true);
+            player1.b2Body.applyLinearImpulse(new Vector2(5000f,0),player1.b2Body.getWorldCenter(),true);
+        if (Gdx.input.isKeyJustPressed(com.badlogic.gdx.Input.Keys.LEFT) && player1.b2Body.getLinearVelocity().x <= 2)
+            player1.b2Body.applyLinearImpulse(new Vector2(-5000f,0),player1.b2Body.getWorldCenter(),true);
 
     }
 
@@ -155,6 +154,8 @@ public class PlayScreen implements Screen {
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
 
         hud.stage.draw();
+
+        world.step(1f/60f, 6,2);
     }
 
     @Override
