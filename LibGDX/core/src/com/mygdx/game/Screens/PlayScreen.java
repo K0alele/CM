@@ -59,7 +59,7 @@ public class PlayScreen implements Screen {
         gamePort = new FitViewport(MyGdxGame.V_WIDTH,MyGdxGame.V_HEIGHT, gameCam);
         hud = new Hud(game.batch);
         mapLoader = new TmxMapLoader();
-        map = mapLoader.load("Lvl1.tmx");
+        map = mapLoader.load("lvl1.tmx");
         renderer = new OrthogonalTiledMapRenderer(map);
 
         gameCam.position.set(gamePort.getWorldWidth()/2, gamePort.getWorldHeight()/2,0);
@@ -110,7 +110,18 @@ public class PlayScreen implements Screen {
             fDef.shape = shape;
             body.createFixture(fDef);
         }
-        player1 = new Player1(world);
+
+        FixtureDef BodyFDef = new FixtureDef(), wheelsFDef = new FixtureDef();
+
+        BodyFDef.density = 15f;
+        BodyFDef.friction = 0.4f;
+        BodyFDef.restitution = 0.3f;
+
+        wheelsFDef.density = BodyFDef.density - 5f;
+        wheelsFDef.friction = 10f;
+        wheelsFDef.restitution = 0.8f;
+
+        player1 = new Player1(world,BodyFDef,wheelsFDef,32,50,20,10);
     }
 
 
@@ -124,7 +135,7 @@ public class PlayScreen implements Screen {
     {
         handleInput(dt);
 
-        gameCam.position.x = player1.b2Body.getPosition().x;
+        gameCam.position.x = player1.carBody.getPosition().x;
 
         gameCam.update();
 
@@ -133,12 +144,7 @@ public class PlayScreen implements Screen {
 
     private void handleInput(float dt)
     {
-        player1.b2Body.applyLinearImpulse(new Vector2(5000f,0),player1.b2Body.getWorldCenter(),true);
-        if (Gdx.input.isKeyJustPressed(com.badlogic.gdx.Input.Keys.RIGHT) && player1.b2Body.getLinearVelocity().x <= 2)
-            player1.b2Body.applyLinearImpulse(new Vector2(5000f,0),player1.b2Body.getWorldCenter(),true);
-        if (Gdx.input.isKeyJustPressed(com.badlogic.gdx.Input.Keys.LEFT) && player1.b2Body.getLinearVelocity().x <= 2)
-            player1.b2Body.applyLinearImpulse(new Vector2(-5000f,0),player1.b2Body.getWorldCenter(),true);
-
+        player1.backWheel.applyLinearImpulse(new Vector2(5000f,0),player1.backWheel.getWorldCenter(),true);
     }
 
     @Override
