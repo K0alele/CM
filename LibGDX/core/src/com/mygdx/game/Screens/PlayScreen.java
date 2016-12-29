@@ -17,7 +17,11 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.Contact;
+import com.badlogic.gdx.physics.box2d.ContactImpulse;
+import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.IntFloatMap;
@@ -28,6 +32,9 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Scenes.Hud;
 import com.mygdx.game.Sprites.Player1;
+import com.mygdx.game.Sprites.Player2;
+import com.mygdx.game.Tools.B2WorldCreator;
+import com.mygdx.game.Tools.WorldContactListener;
 import com.sun.corba.se.impl.oa.poa.ActiveObjectMap;
 import com.sun.corba.se.spi.orbutil.fsm.Input;
 
@@ -37,7 +44,7 @@ import java.io.Console;
  * Created by Diogo on 14/11/2016.
  */
 
-public class PlayScreen implements Screen {
+public class PlayScreen implements Screen{
 
     private MyGdxGame game;
     private OrthographicCamera gameCam;
@@ -50,10 +57,17 @@ public class PlayScreen implements Screen {
 
     private World world;
     private Box2DDebugRenderer debugRenderer;
-    private Player1 player1;
+    public static Player1 player1;
+    public static Player2 player2;
 
+    boolean gyroscopeAvail;
+    float gyroX = 0;
+    float gyroY = 0;
+    float gyroZ = 0;
     public PlayScreen(MyGdxGame _game)
     {
+        gyroscopeAvail = Gdx.input.isPeripheralAvailable(com.badlogic.gdx.Input.Peripheral.Gyroscope);
+
         game = _game;
         gameCam = new OrthographicCamera();
         gamePort = new FitViewport(MyGdxGame.V_WIDTH,MyGdxGame.V_HEIGHT, gameCam);
@@ -67,50 +81,14 @@ public class PlayScreen implements Screen {
         world = new World(new Vector2(0,-100),true);
         debugRenderer = new Box2DDebugRenderer();
 
-        BodyDef bDef = new BodyDef();
-        PolygonShape shape = new PolygonShape();
-        FixtureDef fDef = new FixtureDef();
-        Body body;
+        new B2WorldCreator(world,map);
 
-        //Ground
-        for (MapObject object: map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class))
-        {
-            Rectangle rec = ((RectangleMapObject) object).getRectangle();
+        CreatePlayer();
 
-            bDef.type = BodyDef.BodyType.StaticBody;
-            bDef.position.set(rec.getX() + rec.getWidth()/2 ,rec.getY() + rec.getHeight()/2);
+        world.setContactListener(new WorldContactListener());
+    }
 
-            body = world.createBody(bDef);
-            shape.setAsBox(rec.getWidth()/2, rec.getHeight()/2);
-            fDef.shape = shape;
-            body.createFixture(fDef);
-        }
-        for (MapObject object: map.getLayers().get(2).getObjects().getByType(PolygonMapObject.class))
-        {
-            Polygon rec = ((PolygonMapObject) object).getPolygon();
-
-            bDef.type = BodyDef.BodyType.StaticBody;
-            bDef.position.set(rec.getX(),rec.getY());
-
-            body = world.createBody(bDef);
-            shape.set(rec.getVertices());
-            fDef.shape = shape;
-            body.createFixture(fDef);
-        }
-        //Coins
-        for (MapObject object: map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class))
-        {
-            Rectangle rec = ((RectangleMapObject) object).getRectangle();
-
-            bDef.type = BodyDef.BodyType.StaticBody;
-            bDef.position.set(rec.getX() + rec.getWidth()/2 ,rec.getY() + rec.getHeight()/2);
-
-            body = world.createBody(bDef);
-            shape.setAsBox(rec.getWidth()/2, rec.getHeight()/2);
-            fDef.shape = shape;
-            body.createFixture(fDef);
-        }
-
+    private void CreatePlayer() {
         FixtureDef BodyFDef = new FixtureDef(), wheelsFDef = new FixtureDef();
 
         BodyFDef.density = 15f;
@@ -122,6 +100,8 @@ public class PlayScreen implements Screen {
         wheelsFDef.restitution = 0.8f;
 
         player1 = new Player1(world,BodyFDef,wheelsFDef,32,50,20,10);
+
+        player2 = new Player2(world);
     }
 
 
@@ -131,9 +111,17 @@ public class PlayScreen implements Screen {
     }
 
 
+
     public void Update(float dt)
     {
-        handleInput(dt);
+        if(gyroscopeAvail){
+            gyroX = Gdx.input.getGyroscopeX();
+            gyroY = Gdx.input.getGyroscopeY();
+            gyroZ = Gdx.input.getGyroscopeZ();
+        }
+        //handleInput(dt);
+
+        player1.Update();
 
         gameCam.position.x = player1.carBody.getPosition().x;
 
@@ -144,7 +132,8 @@ public class PlayScreen implements Screen {
 
     private void handleInput(float dt)
     {
-        player1.backWheel.applyLinearImpulse(new Vector2(5000f,0),player1.backWheel.getWorldCenter(),true);
+        //System.out.println(player1.isGround);
+
     }
 
     @Override
@@ -152,7 +141,7 @@ public class PlayScreen implements Screen {
 
         Update(delta);
 
-        Gdx.gl.glClearColor(1,0,0,1);
+        Gdx.gl.glClearColor(56/255f,168/255f,233/255f,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         renderer.render();
@@ -186,6 +175,10 @@ public class PlayScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        map.dispose();
+        renderer.dispose();
+        world.dispose();
+        debugRenderer.dispose();
+        hud.dispose();
     }
 }
