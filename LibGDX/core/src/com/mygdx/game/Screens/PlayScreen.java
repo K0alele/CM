@@ -108,8 +108,6 @@ public class PlayScreen implements Screen{
 
     }
 
-
-
     public void Update(float dt)
     {
         if(gyroscopeAvail){

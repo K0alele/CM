@@ -1,9 +1,12 @@
 package com.mygdx.game.Screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.MyGdxGame;
 
 /**
@@ -13,7 +16,7 @@ import com.mygdx.game.MyGdxGame;
 public class MainMenuScreen implements Screen {
 
     private static final int ButtonsWidth = 300;
-    private static final int ButtonsHeight = 150;
+    private static final int ButtonsHeight = 70;
 
     private MyGdxGame game;
     Texture TitleButton;
@@ -25,10 +28,42 @@ public class MainMenuScreen implements Screen {
     public MainMenuScreen(MyGdxGame _game)
     {
         game = _game;
-        TitleButton = new Texture("TitleButton.png");
-        //ExitButton = new Texture("ExitButton");
-        //SinglePlayerButton = new Texture("SinglePlayerButton");
-        //MultiPlayerButton = new Texture("MultiPlayerButton");
+        TitleButton = new Texture("TITLE.png");
+        ExitButton = new Texture("EXIT.png");
+        SinglePlayerButton = new Texture("SINGLEPLAYER.png");
+        MultiPlayerButton = new Texture("MULTIPLAYER.png");
+
+
+        Gdx.input.setInputProcessor(new InputAdapter() {
+
+            @Override
+            public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+                screenY = Gdx.graphics.getHeight() - screenY;
+                //Exit button
+                Rectangle textureBounds1 = new Rectangle(MyGdxGame.V_WIDTH/2 - ButtonsWidth/2, 10,ButtonsWidth,ButtonsHeight);
+                if (textureBounds1.contains(screenX,screenY));
+                {
+                    System.out.println("EXIT");
+                    //Gdx.app.exit();
+                }
+
+                //Play game button
+                //Rectangle textureBounds2 = new Rectangle(MyGdxGame.V_WIDTH/2 - ButtonsWidth/2, 210,ButtonsWidth,ButtonsHeight);
+                //if (textureBounds2.contains(screenX,screenY));
+                //{
+                //    System.out.println("PLAY");
+                //    //game.setScreen(new PlayScreen(game));
+                //}
+
+
+                System.out.println("1 : X : " + screenX + "Y : " + screenY);
+                System.out.println("2 : X : " + textureBounds1.x + "Y : " + textureBounds1.y);
+                System.out.println("3 : X : " + (textureBounds1.x + textureBounds1.getWidth()) + "Y : " + (10 + textureBounds1.getHeight()));
+
+                return super.touchUp(screenX, screenY, pointer, button);
+            }
+
+        });
     }
 
     @Override
@@ -45,9 +80,14 @@ public class MainMenuScreen implements Screen {
         game.batch.begin();
 
         int x = MyGdxGame.V_WIDTH/2 - ButtonsWidth/2;
-        int y = 100;
-
-        game.batch.draw(TitleButton,x , y,ButtonsWidth,ButtonsHeight);
+        int y = 300;
+        game.batch.draw(TitleButton,x , y,ButtonsWidth * 1.8f,ButtonsHeight * 1.8f);
+        y = 210;
+        game.batch.draw(SinglePlayerButton,x , y,ButtonsWidth,ButtonsHeight);
+        y = 110;
+        game.batch.draw(MultiPlayerButton,x , y,ButtonsWidth,ButtonsHeight);
+        y = 10;
+        game.batch.draw(ExitButton,x , y,ButtonsWidth,ButtonsHeight);
 
         game.batch.end();
     }
