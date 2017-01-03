@@ -71,7 +71,6 @@ public class Player2 extends Sprite implements InputProcessor{
 
         body = world.createBody(bDef);
         body.createFixture(fDef).setUserData(this);
-
     }
 
     @Override

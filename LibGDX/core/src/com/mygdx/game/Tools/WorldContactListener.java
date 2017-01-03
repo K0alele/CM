@@ -9,6 +9,7 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Screens.PlayScreen;
 import com.mygdx.game.Sprites.Player1;
+import com.mygdx.game.Sprites.Player2;
 
 
 /**
@@ -30,6 +31,10 @@ public class WorldContactListener implements ContactListener {
         {
             PlayScreen.player1.HitGround();
             //Gdx.app.log("Collision Started","");
+        }
+        if (isPlayer1CollidingWithPlayer2(fa,fb))
+        {
+            PlayScreen.player1.kill();
         }
     }
 
@@ -62,6 +67,17 @@ public class WorldContactListener implements ContactListener {
         if (fa.getUserData() instanceof B2WorldCreator || fb.getUserData() instanceof  B2WorldCreator)
         {
             if (fb.getUserData() instanceof Player1 || fb.getUserData() instanceof Player1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isPlayer1CollidingWithPlayer2(Fixture fa, Fixture fb)
+    {
+        if (fa.getUserData() instanceof Player1 || fb.getUserData() instanceof  Player1)
+        {
+            if (fb.getUserData() instanceof Player2 || fb.getUserData() instanceof Player2) {
                 return true;
             }
         }

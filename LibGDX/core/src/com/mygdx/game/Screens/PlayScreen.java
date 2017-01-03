@@ -84,7 +84,7 @@ public class PlayScreen implements Screen{
         new B2WorldCreator(world,map);
 
         CreatePlayer();
-
+        player2 = new Player2(world);
         world.setContactListener(new WorldContactListener());
     }
 
@@ -100,8 +100,6 @@ public class PlayScreen implements Screen{
         wheelsFDef.restitution = 0.8f;
 
         player1 = new Player1(world,BodyFDef,wheelsFDef,32,50,20,10);
-
-        player2 = new Player2(world);
     }
 
 
@@ -119,6 +117,7 @@ public class PlayScreen implements Screen{
             gyroY = Gdx.input.getGyroscopeY();
             gyroZ = Gdx.input.getGyroscopeZ();
         }
+        //System.out.println(gyroscopeAvail);
         //handleInput(dt);
 
         player1.Update();
@@ -148,9 +147,38 @@ public class PlayScreen implements Screen{
         debugRenderer.render(world, gameCam.combined);
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
 
+        game.batch.begin();
+
+        player1.wheelSprite1.draw(game.batch);
+        player1.wheelSprite2.draw(game.batch);
+        player1.bodySprite.draw(game.batch);
+
+        game.batch.end();
+
         hud.stage.draw();
 
         world.step(1f/60f, 6,2);
+
+        /*if (player1.isDead)
+        {
+            world.destroyBody(player1.carBody);
+            player1.carBody.setUserData(null);
+            player1.carBody = null;
+            world.destroyBody(player1.frontWheel);
+            player1.frontWheel.setUserData(null);
+            player1.frontWheel = null;
+            world.destroyBody(player1.backWheel);
+            player1.backWheel.setUserData(null);
+            player1.backWheel = null;
+            world.destroyJoint(player1.frontJoint);
+            player1.frontJoint.setUserData(null);
+            player1.frontJoint = null;
+            world.destroyJoint(player1.backJoint);
+            player1.backJoint.setUserData(null);
+            player1.backWheel = null;
+
+            CreatePlayer();
+        }*/
     }
 
     @Override
