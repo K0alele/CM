@@ -2,14 +2,20 @@ package com.mygdx.game.Sprites;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ArrayMap;
+import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Screens.PlayScreen;
 
 /**
@@ -20,11 +26,30 @@ public class Player2 extends Sprite implements InputProcessor{
 
     public String id;
     public World world;
+    public ArrayMap <Body, Sprite> data;
+    Sprite[] crates;
 
     public Player2(World _world)
     {
+        data = new ArrayMap<Body, Sprite>();
         world = _world;
         Gdx.input.setInputProcessor(this);
+        crates = new Sprite[3];
+        for (int i = 0; i < 3; i++) {
+            crates[i] = new Sprite(new Texture("Crate"+(i+1)+".png"));
+            crates[i].setSize(9,9);
+            crates[i].setOrigin(crates[i].getWidth()/2, crates[i].getHeight()/2);
+        }
+    }
+
+    public void Update()
+    {
+        for (int i = 0; i < data.size; i++) {
+            Vector2 SpriteData = new Vector2(data.getValueAt(i).getWidth()/2,data.getValueAt(i).getHeight()/2);
+            Vector2 BodyPos = data.getKeyAt(i).getPosition();
+            data.getValueAt(i).setPosition(BodyPos.x - SpriteData.x, BodyPos.y - SpriteData.y);
+            data.getValueAt(i).setRotation(data.getKeyAt(i).getAngle() * MathUtils.radiansToDegrees);
+        }
     }
 
     @Override
@@ -71,6 +96,7 @@ public class Player2 extends Sprite implements InputProcessor{
 
         body = world.createBody(bDef);
         body.createFixture(fDef).setUserData(this);
+        data.put(body,new Sprite(crates[MathUtils.random(0,2)]));
     }
 
     @Override

@@ -11,6 +11,7 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -119,6 +120,7 @@ public class PlayScreen implements Screen{
         //handleInput(dt);
 
         player1.Update();
+        player2.Update();
 
         gameCam.position.x = player1.carBody.getPosition().x;
         gameCam.position.y = player1.carBody.getPosition().y;
@@ -151,6 +153,10 @@ public class PlayScreen implements Screen{
         player1.wheelSprite1.draw(game.batch);
         player1.wheelSprite2.draw(game.batch);
         player1.bodySprite.draw(game.batch);
+
+        for (int i = 0; i < player2.data.size; i++) {
+            player2.data.getValueAt(i).draw(game.batch);
+        }
 
         game.batch.end();
 
