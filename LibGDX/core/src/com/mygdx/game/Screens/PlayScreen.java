@@ -70,7 +70,7 @@ public class PlayScreen implements Screen{
 
         game = _game;
         gameCam = new OrthographicCamera();
-        gamePort = new FitViewport(MyGdxGame.V_WIDTH,MyGdxGame.V_HEIGHT, gameCam);
+        gamePort = new FitViewport(MyGdxGame.V_WIDTH/2,MyGdxGame.V_HEIGHT/2, gameCam);
         hud = new Hud(game.batch);
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("lvl1.tmx");
@@ -123,6 +123,7 @@ public class PlayScreen implements Screen{
         player1.Update();
 
         gameCam.position.x = player1.carBody.getPosition().x;
+        gameCam.position.y = player1.carBody.getPosition().y;
 
         gameCam.update();
 
@@ -145,7 +146,7 @@ public class PlayScreen implements Screen{
 
         renderer.render();
         debugRenderer.render(world, gameCam.combined);
-        game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
+        game.batch.setProjectionMatrix(gameCam.combined);
 
         game.batch.begin();
 

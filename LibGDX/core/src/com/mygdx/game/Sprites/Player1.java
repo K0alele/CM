@@ -34,10 +34,10 @@ public class Player1 extends Sprite {
         id = "PLAYER";
         isDead = false;
         bodySprite = new Sprite(new Texture("Body.png"));
-        bodySprite.setSize(30,15);
+        bodySprite.setSize(23,13);
         bodySprite.setOrigin(bodySprite.getWidth()/2, bodySprite.getHeight()/2);
         wheelSprite1 = new Sprite(new Texture("Wheel.png"));
-        wheelSprite1.setSize(10,10);
+        wheelSprite1.setSize(9,9);
         wheelSprite1.setOrigin(wheelSprite1.getWidth()/2, wheelSprite1.getHeight()/2);
         wheelSprite2 = new Sprite(wheelSprite1);
 
@@ -100,14 +100,14 @@ public class Player1 extends Sprite {
 
         bodySprite.setPosition(carBody.getPosition().x - bodySprite.getWidth()/2, carBody.getPosition().y - bodySprite.getHeight()/2);
         bodySprite.setRotation(carBody.getAngle() * MathUtils.radiansToDegrees);
-        wheelSprite1.setPosition(frontWheel.getPosition().x, frontWheel.getPosition().y);
+        wheelSprite1.setPosition(frontWheel.getPosition().x - wheelSprite1.getWidth()/2, frontWheel.getPosition().y- wheelSprite1.getHeight()/2);
         wheelSprite1.setRotation(frontWheel.getAngle()* MathUtils.radiansToDegrees);
-        wheelSprite2.setPosition(backWheel.getPosition().x, backWheel.getPosition().y);
+        wheelSprite2.setPosition(backWheel.getPosition().x- wheelSprite2.getWidth()/2, backWheel.getPosition().y - wheelSprite2.getHeight()/2);
         wheelSprite2.setRotation(backWheel.getAngle()* MathUtils.radiansToDegrees);
 
         if (!isGround)
         {
-            carBody.setAngularVelocity(-2f);//-0.5 looks ok
+            carBody.setAngularVelocity(-0.5f);//-0.5 looks ok
             isGround = false;
         }
     }
