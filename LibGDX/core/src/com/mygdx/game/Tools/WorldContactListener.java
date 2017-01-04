@@ -32,10 +32,6 @@ public class WorldContactListener implements ContactListener {
             PlayScreen.player1.HitGround();
             //Gdx.app.log("Collision Started","");
         }
-        if (isPlayer1CollidingWithPlayer2(fa,fb))
-        {
-            PlayScreen.player1.kill();
-        }
     }
 
     @Override

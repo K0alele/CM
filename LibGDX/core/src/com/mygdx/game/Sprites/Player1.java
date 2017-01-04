@@ -28,11 +28,14 @@ public class Player1 extends Sprite {
     public WheelJoint backJoint,frontJoint;
     public boolean isDead;
     public Sprite bodySprite, wheelSprite1,wheelSprite2;
+    private float timer;
 
     public  Player1(World _world, FixtureDef _carBodyFDef, FixtureDef _wheelsFDef, float x , float y , float width, float height)
     {
         id = "PLAYER";
         isDead = false;
+        timer = 0f;
+
         bodySprite = new Sprite(new Texture("Body.png"));
         bodySprite.setSize(23,13);
         bodySprite.setOrigin(bodySprite.getWidth()/2, bodySprite.getHeight()/2);
@@ -91,7 +94,7 @@ public class Player1 extends Sprite {
         carBody.applyAngularImpulse((float) Math.PI, true);
     }
 
-    public void Update(float gyroz)
+    public void Update(float gyroz, float dt)
     {
         //backWheel.applyLinearImpulse(new Vector2(1500f,0),backWheel.getWorldCenter(),true);
         //frontWheel.applyLinearImpulse(new Vector2(1500f,0),frontWheel.getWorldCenter(),true);
@@ -106,12 +109,17 @@ public class Player1 extends Sprite {
         wheelSprite2.setRotation(backWheel.getAngle()* MathUtils.radiansToDegrees);
 
         //System.out.println(isGround);
-
         if (!isGround)
         {
-            carBody.setAngularVelocity(gyroz * 3);//-0.5 looks ok
+            carBody.setAngularVelocity(gyroz * 3 - 0.5f);//-0.5 looks ok
             isGround = false;
         }
+        if (carBody.getLinearVelocity().x <= 0.5f && carBody.getLinearVelocity().x >= -0.5f)
+            timer += dt;
+        else timer = 0;
+
+        if (timer >= 5f)
+            isDead = true;
     }
 
     public void HitGround()

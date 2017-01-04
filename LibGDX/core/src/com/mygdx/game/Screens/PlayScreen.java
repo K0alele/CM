@@ -120,7 +120,7 @@ public class PlayScreen implements Screen{
         //System.out.println(gyroZ);
         //handleInput(dt);
 
-        player1.Update(gyroZ);
+        player1.Update(gyroZ, dt);
         player2.Update();
 
         gameCam.position.x = player1.carBody.getPosition().x;
@@ -167,28 +167,8 @@ public class PlayScreen implements Screen{
 
         if (player1.isDead)
         {
-
-            /*world.destroyBody(player1.carBody);
-            player1.carBody.setUserData(null);
-            player1.carBody = null;
-            world.destroyBody(player1.frontWheel);
-            player1.frontWheel.setUserData(null);
-            player1.frontWheel = null;
-            world.destroyBody(player1.backWheel);
-            player1.backWheel.setUserData(null);
-            player1.backWheel = null;
-            world.destroyJoint(player1.frontJoint);
-            player1.frontJoint.setUserData(null);
-            player1.frontJoint = null;
-            world.destroyJoint(player1.backJoint);
-            player1.backJoint.setUserData(null);
-            player1.backWheel = null;
-            */
-
-            //world.dispose();
-            //game.setScreen(new PlayScreen(game));
-
-            //CreatePlayer();
+            world.dispose();
+            game.setScreen(new MainMenuScreen(game));
         }
     }
 

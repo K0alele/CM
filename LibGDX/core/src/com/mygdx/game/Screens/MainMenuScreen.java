@@ -24,7 +24,6 @@ public class MainMenuScreen implements Screen {
     Texture SinglePlayerButton;
     Texture MultiPlayerButton;
 
-
     public MainMenuScreen(MyGdxGame _game)
     {
         game = _game;
@@ -40,20 +39,20 @@ public class MainMenuScreen implements Screen {
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
                 screenY = Gdx.graphics.getHeight() - screenY;
                 //Exit button
-                Rectangle textureBounds1 = new Rectangle(MyGdxGame.V_WIDTH/2 - ButtonsWidth/2, 10,ButtonsWidth,ButtonsHeight);
-                if (screenX >= textureBounds1.x);
+                Rectangle textureBounds1 = new Rectangle(Gdx.graphics.getWidth()/2 - ButtonsWidth/2, 10,ButtonsWidth,ButtonsHeight);
+                if (textureBounds1.contains(screenX, screenY))
                 {
                     System.out.println("EXIT");
-                    //Gdx.app.exit();
+                    Gdx.app.exit();
                 }
 
                 //Play game button
-                //Rectangle textureBounds2 = new Rectangle(MyGdxGame.V_WIDTH/2 - ButtonsWidth/2, 210,ButtonsWidth,ButtonsHeight);
-                //if (textureBounds2.contains(screenX,screenY));
-                //{
-                //    System.out.println("PLAY");
-                //    //game.setScreen(new PlayScreen(game));
-                //}
+                Rectangle textureBounds2 = new Rectangle(MyGdxGame.V_WIDTH/2 - ButtonsWidth/2, 210,ButtonsWidth,ButtonsHeight);
+                if (textureBounds2.contains(screenX,screenY))
+                {
+                    System.out.println("PLAY");
+                    game.setScreen(new PlayScreen(game));
+                }
 
                 System.out.println("1 : X : " + screenX + " Y : " + screenY);
                 System.out.println("2 : X : " + textureBounds1.x + " Y : " + textureBounds1.y);
@@ -61,12 +60,12 @@ public class MainMenuScreen implements Screen {
 
                 return super.touchUp(screenX, screenY, pointer, button);
             }
-
         });
     }
 
     @Override
-    public void show() {
+    public void show()
+    {
 
     }
 
@@ -78,7 +77,7 @@ public class MainMenuScreen implements Screen {
 
         game.batch.begin();
 
-        int x = MyGdxGame.V_WIDTH/2 - ButtonsWidth/2;
+        int x = Gdx.graphics.getWidth()/2 - ButtonsWidth/2;
         int y = 300;
         game.batch.draw(TitleButton,x , y,ButtonsWidth * 1.8f,ButtonsHeight * 1.8f);
         y = 210;
