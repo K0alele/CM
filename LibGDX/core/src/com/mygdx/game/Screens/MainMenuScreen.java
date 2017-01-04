@@ -18,8 +18,8 @@ import com.mygdx.game.MyGdxGame;
 
 public class MainMenuScreen implements Screen {
 
-    private static final int ButtonsWidth = 300;
-    private static final int ButtonsHeight = 70;
+    private static final int ButtonsWidth = (int)(1/3*Gdx.graphics.getWidth());
+    private static final int ButtonsHeight = (int)(7/30*ButtonsWidth);
     private OrthographicCamera gameCam;
 
     private Viewport gamePort;
@@ -41,6 +41,7 @@ public class MainMenuScreen implements Screen {
         gameCam = new OrthographicCamera();
         gamePort = new FitViewport(MyGdxGame.V_WIDTH/2,MyGdxGame.V_HEIGHT/2, gameCam);
         gameCam.position.set(gamePort.getWorldWidth()/2, gamePort.getWorldHeight()/2,0);
+        System.out.println("1 : X : " + ButtonsWidth + " Y : " + ButtonsHeight);
 
         Gdx.input.setInputProcessor(new InputAdapter() {
 
@@ -55,12 +56,20 @@ public class MainMenuScreen implements Screen {
                     Gdx.app.exit();
                 }
 
-                //Play game button
-                Rectangle textureBounds2 = new Rectangle(MyGdxGame.V_WIDTH/2 - ButtonsWidth/2, 210,ButtonsWidth,ButtonsHeight);
+                //Play Singleplayer button
+                Rectangle textureBounds2 = new Rectangle(Gdx.graphics.getWidth()/2 - ButtonsWidth/2, Gdx.graphics.getHeight()*2/4+10,ButtonsWidth,ButtonsHeight);
                 if (textureBounds2.contains(screenX,screenY))
                 {
                     System.out.println("PLAY");
                     game.setScreen(new PlayScreen(game));
+                }
+
+                //Play Multiplayer button
+                Rectangle textureBounds3 = new Rectangle(Gdx.graphics.getWidth()/2 - ButtonsWidth/2, Gdx.graphics.getHeight()*1/4+10,ButtonsWidth,ButtonsHeight);
+                if (textureBounds2.contains(screenX,screenY))
+                {
+                    System.out.println("PLAY");
+                    Gdx.app.exit();
                 }
 
                 //System.out.println("1 : X : " + screenX + " Y : " + screenY);
@@ -86,12 +95,13 @@ public class MainMenuScreen implements Screen {
 
         game.batch.begin();
 
-        int x = Gdx.graphics.getWidth()/2 - ButtonsWidth/2;
-        int y = 300;
+        int x = Gdx.graphics.getWidth()/2 - (int)(ButtonsWidth*1.8f/2);
+        int y = Gdx.graphics.getHeight()*3/4+10;
         game.batch.draw(TitleButton,x , y,ButtonsWidth * 1.8f,ButtonsHeight * 1.8f);
-        y = 210;
+        x = Gdx.graphics.getWidth()/2 - ButtonsWidth/2;
+        y = Gdx.graphics.getHeight()*2/4+10;
         game.batch.draw(SinglePlayerButton,x , y,ButtonsWidth,ButtonsHeight);
-        y = 110;
+        y = Gdx.graphics.getHeight()*1/4+10;
         game.batch.draw(MultiPlayerButton,x , y,ButtonsWidth,ButtonsHeight);
         y = 10;
         game.batch.draw(ExitButton,x , y,ButtonsWidth,ButtonsHeight);
