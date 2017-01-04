@@ -41,7 +41,7 @@ public class MainMenuScreen implements Screen {
                 screenY = Gdx.graphics.getHeight() - screenY;
                 //Exit button
                 Rectangle textureBounds1 = new Rectangle(MyGdxGame.V_WIDTH/2 - ButtonsWidth/2, 10,ButtonsWidth,ButtonsHeight);
-                if (textureBounds1.contains(screenX,screenY));
+                if (screenX >= textureBounds1.x);
                 {
                     System.out.println("EXIT");
                     //Gdx.app.exit();
@@ -55,10 +55,9 @@ public class MainMenuScreen implements Screen {
                 //    //game.setScreen(new PlayScreen(game));
                 //}
 
-
-                System.out.println("1 : X : " + screenX + "Y : " + screenY);
-                System.out.println("2 : X : " + textureBounds1.x + "Y : " + textureBounds1.y);
-                System.out.println("3 : X : " + (textureBounds1.x + textureBounds1.getWidth()) + "Y : " + (10 + textureBounds1.getHeight()));
+                System.out.println("1 : X : " + screenX + " Y : " + screenY);
+                System.out.println("2 : X : " + textureBounds1.x + " Y : " + textureBounds1.y);
+                System.out.println("3 : X : " + (textureBounds1.x + textureBounds1.getWidth()) + " Y : " + (10 + textureBounds1.getHeight()));
 
                 return super.touchUp(screenX, screenY, pointer, button);
             }

@@ -70,7 +70,7 @@ public class Player2 extends Sprite implements InputProcessor{
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 
-        CreateBox(screenX + ((int)PlayScreen.player1.carBody.getPosition().x - Gdx.graphics.getWidth() / 2), 60 /*Gdx.graphics.getHeight() - screenY*/);
+        CreateBox(screenX + ((int)PlayScreen.player1.carBody.getPosition().x - Gdx.graphics.getWidth() / 2), (int)PlayScreen.player1.carBody.getPosition().y + 30 /*Gdx.graphics.getHeight() - screenY*/);
         return false;
     }
 

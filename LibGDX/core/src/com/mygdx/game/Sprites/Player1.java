@@ -91,7 +91,7 @@ public class Player1 extends Sprite {
         carBody.applyAngularImpulse((float) Math.PI, true);
     }
 
-    public void Update()
+    public void Update(float gyroz)
     {
         //backWheel.applyLinearImpulse(new Vector2(1500f,0),backWheel.getWorldCenter(),true);
         //frontWheel.applyLinearImpulse(new Vector2(1500f,0),frontWheel.getWorldCenter(),true);
@@ -102,12 +102,14 @@ public class Player1 extends Sprite {
         bodySprite.setRotation(carBody.getAngle() * MathUtils.radiansToDegrees);
         wheelSprite1.setPosition(frontWheel.getPosition().x - wheelSprite1.getWidth()/2, frontWheel.getPosition().y- wheelSprite1.getHeight()/2);
         wheelSprite1.setRotation(frontWheel.getAngle()* MathUtils.radiansToDegrees);
-        wheelSprite2.setPosition(backWheel.getPosition().x- wheelSprite2.getWidth()/2, backWheel.getPosition().y - wheelSprite2.getHeight()/2);
+        wheelSprite2.setPosition(backWheel.getPosition().x - wheelSprite2.getWidth()/2, backWheel.getPosition().y - wheelSprite2.getHeight()/2);
         wheelSprite2.setRotation(backWheel.getAngle()* MathUtils.radiansToDegrees);
+
+        //System.out.println(isGround);
 
         if (!isGround)
         {
-            carBody.setAngularVelocity(-0.5f);//-0.5 looks ok
+            carBody.setAngularVelocity(gyroz * 3);//-0.5 looks ok
             isGround = false;
         }
     }
