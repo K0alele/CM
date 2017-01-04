@@ -167,14 +167,18 @@ public class PlayScreen implements Screen{
 
         if (player1.isDead)
         {
-            world.dispose();
-            //CreatePlayer();
+            player1.isDead = false;
+            player1.timer = 0f;
+            player1.won = false;
+            dispose();
             game.setScreen(new MainMenuScreen(game));
         }
         if (player1.won)
         {
-            world.dispose();
-            //CreatePlayer();
+            player1.isDead = false;
+            player1.timer = 0f;
+            player1.won = false;
+            dispose();
             game.setScreen(new MainMenuScreen(game));
         }
     }

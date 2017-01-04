@@ -20,7 +20,7 @@ public class MainMenuScreen implements Screen {
 
     private static final int ButtonsWidth = (int)(1f/3f * Gdx.graphics.getWidth());
     private static final int ButtonsHeight = (int)(7f/30f*ButtonsWidth);
-    private OrthographicCamera gameCam;
+    //private OrthographicCamera gameCam;
 
     private Viewport gamePort;
 
@@ -38,9 +38,9 @@ public class MainMenuScreen implements Screen {
         SinglePlayerButton = new Texture("SINGLEPLAYER.png");
         MultiPlayerButton = new Texture("MULTIPLAYER.png");
 
-        gameCam = new OrthographicCamera();
-        gamePort = new FitViewport(MyGdxGame.V_WIDTH/2,MyGdxGame.V_HEIGHT/2, gameCam);
-        gameCam.position.set(gamePort.getWorldWidth()/2, gamePort.getWorldHeight()/2,0);
+        //gameCam = new OrthographicCamera();
+        //gamePort = new FitViewport(MyGdxGame.V_WIDTH/2,MyGdxGame.V_HEIGHT/2, gameCam);
+        //gameCam.position.set(gamePort.getWorldWidth()/2, gamePort.getWorldHeight()/2,0);
 
         Gdx.input.setInputProcessor(new InputAdapter() {
 
@@ -71,7 +71,7 @@ public class MainMenuScreen implements Screen {
                     Gdx.app.exit();
                 }
 
-               // System.out.println("1 : X : " + screenX + " Y : " + screenY);
+                // System.out.println("1 : X : " + screenX + " Y : " + screenY);
                 //System.out.println("3 : X : " + (textureBounds1.x + textureBounds1.getWidth()) + " Y : " + (10 + textureBounds1.getHeight()));
 
                 return super.touchUp(screenX, screenY, pointer, button);
@@ -109,7 +109,7 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        gamePort.update(width,height);
+        //gamePort.update(width,height);
     }
 
     @Override

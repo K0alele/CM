@@ -23,18 +23,19 @@ import com.badlogic.gdx.utils.Array;
 public class Player1 extends Sprite {
 
     public String id;
-    public static boolean isGround = false, won = false;
+    public static boolean isGround = false, won;
     public Body frontWheel, backWheel, carBody;
     public WheelJoint backJoint,frontJoint;
     public boolean isDead;
     public Sprite bodySprite, wheelSprite1,wheelSprite2;
-    private float timer;
+    public float timer;
 
     public  Player1(World _world, FixtureDef _carBodyFDef, FixtureDef _wheelsFDef, float x , float y , float width, float height)
     {
         id = "PLAYER";
         isDead = false;
         timer = 0f;
+        won = false;
 
         bodySprite = new Sprite(new Texture("Body.png"));
         bodySprite.setSize(23,13);
