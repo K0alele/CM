@@ -8,6 +8,8 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Screens.PlayScreen;
+import com.mygdx.game.Sprites.Coin;
+import com.mygdx.game.Sprites.InteractiveObject;
 import com.mygdx.game.Sprites.Player1;
 import com.mygdx.game.Sprites.Player2;
 
@@ -31,6 +33,10 @@ public class WorldContactListener implements ContactListener {
         {
             PlayScreen.player1.HitGround();
             //Gdx.app.log("Collision Started","");
+        }
+        if (isPlayerColidingWithCoins(fa,fb))
+        {
+            PlayScreen.player1.won = true;
         }
     }
 
@@ -61,6 +67,17 @@ public class WorldContactListener implements ContactListener {
     private boolean isPlayerColidingWithGround(Fixture fa, Fixture fb)
     {
         if (fa.getUserData() instanceof B2WorldCreator || fb.getUserData() instanceof  B2WorldCreator)
+        {
+            if (fb.getUserData() instanceof Player1 || fb.getUserData() instanceof Player1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isPlayerColidingWithCoins(Fixture fa, Fixture fb)
+    {
+        if (fa.getUserData() instanceof InteractiveObject || fb.getUserData() instanceof InteractiveObject)
         {
             if (fb.getUserData() instanceof Player1 || fb.getUserData() instanceof Player1) {
                 return true;

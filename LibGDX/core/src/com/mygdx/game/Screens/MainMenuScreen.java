@@ -4,9 +4,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGdxGame;
 
 /**
@@ -17,6 +20,9 @@ public class MainMenuScreen implements Screen {
 
     private static final int ButtonsWidth = 300;
     private static final int ButtonsHeight = 70;
+    private OrthographicCamera gameCam;
+
+    private Viewport gamePort;
 
     private MyGdxGame game;
     Texture TitleButton;
@@ -32,6 +38,9 @@ public class MainMenuScreen implements Screen {
         SinglePlayerButton = new Texture("SINGLEPLAYER.png");
         MultiPlayerButton = new Texture("MULTIPLAYER.png");
 
+        gameCam = new OrthographicCamera();
+        gamePort = new FitViewport(MyGdxGame.V_WIDTH/2,MyGdxGame.V_HEIGHT/2, gameCam);
+        gameCam.position.set(gamePort.getWorldWidth()/2, gamePort.getWorldHeight()/2,0);
 
         Gdx.input.setInputProcessor(new InputAdapter() {
 
@@ -54,9 +63,9 @@ public class MainMenuScreen implements Screen {
                     game.setScreen(new PlayScreen(game));
                 }
 
-                System.out.println("1 : X : " + screenX + " Y : " + screenY);
-                System.out.println("2 : X : " + textureBounds1.x + " Y : " + textureBounds1.y);
-                System.out.println("3 : X : " + (textureBounds1.x + textureBounds1.getWidth()) + " Y : " + (10 + textureBounds1.getHeight()));
+                //System.out.println("1 : X : " + screenX + " Y : " + screenY);
+                //System.out.println("2 : X : " + textureBounds1.x + " Y : " + textureBounds1.y);
+                //System.out.println("3 : X : " + (textureBounds1.x + textureBounds1.getWidth()) + " Y : " + (10 + textureBounds1.getHeight()));
 
                 return super.touchUp(screenX, screenY, pointer, button);
             }
@@ -92,7 +101,7 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-
+        gamePort.update(width,height);
     }
 
     @Override

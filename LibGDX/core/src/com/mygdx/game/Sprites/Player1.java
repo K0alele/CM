@@ -23,7 +23,7 @@ import com.badlogic.gdx.utils.Array;
 public class Player1 extends Sprite {
 
     public String id;
-    public static boolean isGround = false;
+    public static boolean isGround = false, won = false;
     public Body frontWheel, backWheel, carBody;
     public WheelJoint backJoint,frontJoint;
     public boolean isDead;
@@ -114,7 +114,7 @@ public class Player1 extends Sprite {
             carBody.setAngularVelocity(gyroz * 3 - 0.5f);//-0.5 looks ok
             isGround = false;
         }
-        if (carBody.getLinearVelocity().x <= 0.5f && carBody.getLinearVelocity().x >= -0.5f)
+        if (carBody.getLinearVelocity().x <= 3f && carBody.getLinearVelocity().x >= -3f)
             timer += dt;
         else timer = 0;
 

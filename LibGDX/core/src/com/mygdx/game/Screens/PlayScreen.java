@@ -168,12 +168,20 @@ public class PlayScreen implements Screen{
         if (player1.isDead)
         {
             world.dispose();
+            //CreatePlayer();
+            game.setScreen(new MainMenuScreen(game));
+        }
+        if (player1.won)
+        {
+            world.dispose();
+            //CreatePlayer();
             game.setScreen(new MainMenuScreen(game));
         }
     }
 
     @Override
-    public void resize(int width, int height) {
+    public void resize(int width, int height)
+    {
         gamePort.update(width,height);
     }
 
