@@ -70,15 +70,13 @@ public class Player2 extends Sprite implements InputProcessor{
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 
-        CreateBox(screenX + ((int)PlayScreen.player1.carBody.getPosition().x - Gdx.graphics.getWidth() / 2), (int)PlayScreen.player1.carBody.getPosition().y + 30 /*Gdx.graphics.getHeight() - screenY*/);
+        //CreateBox(screenX + ((int)PlayScreen.player1.carBody.getPosition().x - Gdx.graphics.getWidth() / 2), (int)PlayScreen.player1.carBody.getPosition().y + 30 /*Gdx.graphics.getHeight() - screenY*/);
+        CreateBox(screenX * MyGdxGame.V_WIDTH/Gdx.graphics.getWidth()/2 +(((int)PlayScreen.player1.carBody.getPosition().x - MyGdxGame.V_WIDTH/4)),(int)PlayScreen.player1.carBody.getPosition().y + 30);
+        //CreateBox(/*screenX +*/ ((int)PlayScreen.player1.carBody.getPosition().x/* - Gdx.graphics.getWidth() / 2*/),(int)PlayScreen.player1.carBody.getPosition().y);/*Gdx.graphics.getHeight() - screenY*/
         return false;
     }
 
     private void CreateBox(int x, int y) {
-
-        System.out.println("2 : X : " + x + "Y : " + y);
-        System.out.println("1 : X : " + PlayScreen.player1.carBody.getPosition().x + "Y : " + PlayScreen.player1.carBody.getPosition().y);
-
 
         float bs = 4f;
         BodyDef bDef = new BodyDef();
@@ -89,8 +87,12 @@ public class Player2 extends Sprite implements InputProcessor{
         FixtureDef fDef = new FixtureDef();
         Body body;
 
+        fDef.density =  0.3f;
+        fDef.friction = 0.4f;
+        fDef.restitution = 0.3f;
+
         PolygonShape bodyShape = new PolygonShape();
-        bodyShape.set(new float[] {x - bs, y - bs,x + bs,y - bs, x + bs, y +bs, x-bs, y + bs});
+        bodyShape.setAsBox(bs,bs);
 
         fDef.shape = bodyShape;
 
