@@ -116,8 +116,7 @@ public class Player1 extends Sprite {
         }
         if (carBody.getLinearVelocity().x <= 3f && carBody.getLinearVelocity().x >= -3f)
             timer += dt;
-        else timer = 0;
-
+        System.out.println("1 : X : " + carBody.getLinearVelocity().x);
         if (timer >= 5f)
             isDead = true;
     }
