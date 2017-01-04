@@ -18,8 +18,8 @@ import com.mygdx.game.MyGdxGame;
 
 public class MainMenuScreen implements Screen {
 
-    private static final int ButtonsWidth = (int)(1/3*Gdx.graphics.getWidth());
-    private static final int ButtonsHeight = (int)(7/30*ButtonsWidth);
+    private static final int ButtonsWidth = (int)(1f/3f * Gdx.graphics.getWidth());
+    private static final int ButtonsHeight = (int)(7f/30f*ButtonsWidth);
     private OrthographicCamera gameCam;
 
     private Viewport gamePort;
@@ -41,7 +41,6 @@ public class MainMenuScreen implements Screen {
         gameCam = new OrthographicCamera();
         gamePort = new FitViewport(MyGdxGame.V_WIDTH/2,MyGdxGame.V_HEIGHT/2, gameCam);
         gameCam.position.set(gamePort.getWorldWidth()/2, gamePort.getWorldHeight()/2,0);
-        System.out.println("1 : X : " + ButtonsWidth + " Y : " + ButtonsHeight);
 
         Gdx.input.setInputProcessor(new InputAdapter() {
 
@@ -66,14 +65,13 @@ public class MainMenuScreen implements Screen {
 
                 //Play Multiplayer button
                 Rectangle textureBounds3 = new Rectangle(Gdx.graphics.getWidth()/2 - ButtonsWidth/2, Gdx.graphics.getHeight()*1/4+10,ButtonsWidth,ButtonsHeight);
-                if (textureBounds2.contains(screenX,screenY))
+                if (textureBounds3.contains(screenX,screenY))
                 {
                     System.out.println("PLAY");
                     Gdx.app.exit();
                 }
 
-                //System.out.println("1 : X : " + screenX + " Y : " + screenY);
-                //System.out.println("2 : X : " + textureBounds1.x + " Y : " + textureBounds1.y);
+               // System.out.println("1 : X : " + screenX + " Y : " + screenY);
                 //System.out.println("3 : X : " + (textureBounds1.x + textureBounds1.getWidth()) + " Y : " + (10 + textureBounds1.getHeight()));
 
                 return super.touchUp(screenX, screenY, pointer, button);
