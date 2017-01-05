@@ -68,12 +68,11 @@ public class MainMenuScreen implements Screen {
                 if (textureBounds3.contains(screenX,screenY))
                 {
                     System.out.println("PLAY");
-                    Gdx.app.exit();
+                    game.setScreen(new PlayScreen(game));
                 }
 
                 // System.out.println("1 : X : " + screenX + " Y : " + screenY);
                 //System.out.println("3 : X : " + (textureBounds1.x + textureBounds1.getWidth()) + " Y : " + (10 + textureBounds1.getHeight()));
-
                 return super.touchUp(screenX, screenY, pointer, button);
             }
         });

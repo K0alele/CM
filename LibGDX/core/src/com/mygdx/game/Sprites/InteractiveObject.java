@@ -39,6 +39,7 @@ public abstract class InteractiveObject {
         body = world.createBody(bDef);
         shape.setAsBox(bounds.getWidth()/2, bounds.getHeight()/2);
         fDef.shape = shape;
+        //body.createFixture(fDef).setUserData(id);
         body.createFixture(fDef).setUserData(this);
     }
 }

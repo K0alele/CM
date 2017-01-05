@@ -29,6 +29,7 @@ public class Player1 extends Sprite {
     public boolean isDead;
     public Sprite bodySprite, wheelSprite1,wheelSprite2;
     public float timer;
+    private float speed;
 
     public  Player1(World _world, FixtureDef _carBodyFDef, FixtureDef _wheelsFDef, float x , float y , float width, float height)
     {
@@ -36,6 +37,7 @@ public class Player1 extends Sprite {
         isDead = false;
         timer = 0f;
         won = false;
+        speed = 120f;
 
         bodySprite = new Sprite(new Texture("Body.png"));
         bodySprite.setSize(23,13);
@@ -56,7 +58,7 @@ public class Player1 extends Sprite {
         _carBodyFDef.shape = bodyShape;
 
         carBody = _world.createBody(bodyDef);
-        carBody.createFixture(_carBodyFDef).setUserData(this);
+        carBody.createFixture(_carBodyFDef).setUserData("BODY");
 
         //backWheel
         CircleShape wheelShape = new CircleShape();
@@ -65,12 +67,12 @@ public class Player1 extends Sprite {
         _wheelsFDef.shape = wheelShape;
 
         backWheel = _world.createBody(bodyDef);
-        backWheel.createFixture(_wheelsFDef).setUserData(this);
+        backWheel.createFixture(_wheelsFDef).setUserData("LEFTW");
 
         //rightWheel
 
         frontWheel = _world.createBody(bodyDef);
-        frontWheel.createFixture(_wheelsFDef).setUserData(this);
+        frontWheel.createFixture(_wheelsFDef).setUserData("RIGHTW");
 
         //backJoint
         WheelJointDef wheelJointDef = new WheelJointDef();
@@ -99,8 +101,8 @@ public class Player1 extends Sprite {
     {
         //backWheel.applyLinearImpulse(new Vector2(1500f,0),backWheel.getWorldCenter(),true);
         //frontWheel.applyLinearImpulse(new Vector2(1500f,0),frontWheel.getWorldCenter(),true);
-        backWheel.applyAngularImpulse(-4000f,true);//-4000 works
-        frontWheel.applyAngularImpulse(-4000f,true);
+        backWheel.applyAngularImpulse(-4000f * dt * speed,true);//-4000 works
+        frontWheel.applyAngularImpulse(-4000f * dt * speed,true);
 
         bodySprite.setPosition(carBody.getPosition().x - bodySprite.getWidth()/2, carBody.getPosition().y - bodySprite.getHeight()/2);
         bodySprite.setRotation(carBody.getAngle() * MathUtils.radiansToDegrees);
@@ -109,22 +111,16 @@ public class Player1 extends Sprite {
         wheelSprite2.setPosition(backWheel.getPosition().x - wheelSprite2.getWidth()/2, backWheel.getPosition().y - wheelSprite2.getHeight()/2);
         wheelSprite2.setRotation(backWheel.getAngle()* MathUtils.radiansToDegrees);
 
-        //System.out.println(isGround);
+        System.out.println(isGround);
         if (!isGround)
         {
             carBody.setAngularVelocity(gyroz * 3 - 0.5f);//-0.5 looks ok
-            isGround = false;
         }
         if (carBody.getLinearVelocity().x <= 3f && carBody.getLinearVelocity().x >= -3f)
             timer += dt;
-        System.out.println("1 : X : " + carBody.getLinearVelocity().x);
+        //System.out.println("1 : X : " + carBody.getLinearVelocity().x);
         if (timer >= 5f)
             isDead = true;
-    }
-
-    public void HitGround()
-    {
-        isGround = true;
     }
 
     public void kill()

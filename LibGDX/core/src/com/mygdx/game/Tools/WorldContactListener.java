@@ -27,13 +27,11 @@ public class WorldContactListener implements ContactListener {
         Fixture fb = contact.getFixtureB();
 
         if (fa == null || fb == null ) return;
-        if (fa.getUserData() == null || fb.getUserData() == null) return;
-
-        if (isPlayerColidingWithGround(fa,fb))
+        if (fa.getUserData() != null || fb.getUserData() != null)
         {
-            PlayScreen.player1.HitGround();
-            //Gdx.app.log("Collision Started","");
+            PlayScreen.player1.isGround = isPlayerColidingWithGround(fa,fb);
         }
+
         if (isPlayerColidingWithCoins(fa,fb))
         {
             PlayScreen.player1.won = true;
@@ -47,9 +45,11 @@ public class WorldContactListener implements ContactListener {
         Fixture fb = contact.getFixtureB();
 
         if (fa == null || fb == null ) return;
-        if (fa.getUserData() == null || fb.getUserData() == null) return;
-
-        PlayScreen.player1.isGround = false;
+        if (fa.getUserData() != null || fb.getUserData() != null)
+        {
+            PlayScreen.player1.isGround = !isPlayerColidingWithGround(fa, fb);
+        }
+        //PlayScreen.player1.isGround = false;
 
         //Gdx.app.log("Collision Stoped ","");
     }
@@ -68,7 +68,9 @@ public class WorldContactListener implements ContactListener {
     {
         if (fa.getUserData() instanceof B2WorldCreator || fb.getUserData() instanceof  B2WorldCreator)
         {
-            if (fb.getUserData() instanceof Player1 || fb.getUserData() instanceof Player1) {
+            if ((fa.getUserData().toString() == "LEFTW" || fb.getUserData().toString() == "LEFTW")
+                    ||(fa.getUserData().toString() == "RIGHTW" || fb.getUserData().toString() == "RIGHTW"
+                    || (fa.getUserData().toString() == "BODY" || fb.getUserData().toString() == "BODY"))) {
                 return true;
             }
         }
@@ -79,7 +81,9 @@ public class WorldContactListener implements ContactListener {
     {
         if (fa.getUserData() instanceof InteractiveObject || fb.getUserData() instanceof InteractiveObject)
         {
-            if (fb.getUserData() instanceof Player1 || fb.getUserData() instanceof Player1) {
+            if ((fa.getUserData() == "LEFTW" || fb.getUserData() == "LEFTW")
+                    ||(fa.getUserData() == "RIGHTW" || fb.getUserData() == "RIGHTW"
+                    || (fa.getUserData() == "BODY" || fb.getUserData() == "BODY"))) {
                 return true;
             }
         }
@@ -88,9 +92,11 @@ public class WorldContactListener implements ContactListener {
 
     private boolean isPlayer1CollidingWithPlayer2(Fixture fa, Fixture fb)
     {
-        if (fa.getUserData() instanceof Player1 || fb.getUserData() instanceof  Player1)
+        if (fa.getUserData() instanceof Player2 || fb.getUserData() instanceof  Player2)
         {
-            if (fb.getUserData() instanceof Player2 || fb.getUserData() instanceof Player2) {
+            if ((fb.getUserData() == "LEFTW" || fb.getUserData() == "LEFTW")
+                    ||(fb.getUserData() == "RIGHTW" || fb.getUserData() == "RIGHTW"
+                    || (fb.getUserData() == "BODY" || fb.getUserData() == "BODY"))) {
                 return true;
             }
         }
