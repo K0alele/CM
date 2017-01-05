@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.Screens.PlayScreen;
 import com.sun.org.apache.xpath.internal.operations.String;
 
 /**
@@ -22,9 +23,9 @@ public class Hud implements Disposable{
     public Stage stage;
     private Viewport viewport;
 
-    private Integer worldTimer;
+    private int worldTimer;
     private float timeCount;
-    private Integer score;
+    private int score;
 
     Label CountDownLabel;
     Label ScoreLabel;
@@ -35,7 +36,7 @@ public class Hud implements Disposable{
     public Hud(SpriteBatch sb)
     {
         worldTimer = 300;
-        timeCount = 0;
+        //timeCount = PlayScreen.player1.timer;
         score = 0;
 
         viewport = new FitViewport(MyGdxGame.V_WIDTH,MyGdxGame.V_HEIGHT, new OrthographicCamera());
@@ -48,7 +49,7 @@ public class Hud implements Disposable{
 
         CountDownLabel = new Label(java.lang.String.format("%03d",worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         ScoreLabel = new Label(java.lang.String.format("%05d",score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        TimeLabel = new Label("TIME", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        TimeLabel = new Label(java.lang.String.format("TIME: %.2f",timeCount), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         //LevelLaber = new Label("TIME", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         // = new Label("TIME", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 

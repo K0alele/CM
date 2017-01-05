@@ -35,7 +35,7 @@ public class Player1 extends Sprite {
     {
         id = "PLAYER";
         isDead = false;
-        timer = 0f;
+        timer = 5f;
         won = false;
         speed = 120f;
 
@@ -117,9 +117,9 @@ public class Player1 extends Sprite {
             carBody.setAngularVelocity(gyroz * 3 - 0.5f);//-0.5 looks ok
         }
         if (carBody.getLinearVelocity().x <= 3f && carBody.getLinearVelocity().x >= -3f)
-            timer += dt;
+            timer -= dt;
         //System.out.println("1 : X : " + carBody.getLinearVelocity().x);
-        if (timer >= 5f)
+        if (timer <= 0f)
             isDead = true;
     }
 

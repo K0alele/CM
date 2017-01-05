@@ -169,7 +169,7 @@ public class PlayScreen implements Screen{
         if (player1.isDead)
         {
             player1.isDead = false;
-            player1.timer = 0f;
+            player1.timer = 5f;
             player1.won = false;
             dispose();
             game.setScreen(new MainMenuScreen(game));
@@ -177,7 +177,7 @@ public class PlayScreen implements Screen{
         if (player1.won)
         {
             player1.isDead = false;
-            player1.timer = 0f;
+            player1.timer = 5f;
             player1.won = false;
             dispose();
             game.setScreen(new MainMenuScreen(game));
