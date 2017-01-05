@@ -14,6 +14,8 @@ import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Screens.PlayScreen;
 import com.sun.org.apache.xpath.internal.operations.String;
 
+import java.sql.Time;
+
 /**
  * Created by Diogo on 14/11/2016.
  */
@@ -60,6 +62,13 @@ public class Hud implements Disposable{
 
         stage.addActor(table);
     }
+
+    public void Update()
+    {
+        timeCount = PlayScreen.player1.timer;
+        TimeLabel.setText(java.lang.String.format("TIME: %.2f",timeCount));
+    }
+
 
     @Override
     public void dispose() {

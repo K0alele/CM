@@ -120,6 +120,8 @@ public class PlayScreen implements Screen{
         //System.out.println(gyroZ);
         //handleInput(dt);
 
+        hud.Update();
+
         player1.Update(gyroZ, dt);
         player2.Update();
 
