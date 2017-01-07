@@ -7,18 +7,13 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
-import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.physics.box2d.joints.WheelJoint;
 import com.badlogic.gdx.physics.box2d.joints.WheelJointDef;
-import com.badlogic.gdx.utils.Array;
 
-/**
- * Created by Diogo on 29/11/2016.
- */
+
 
 public class Player1 extends Sprite {
 
@@ -29,7 +24,7 @@ public class Player1 extends Sprite {
     public boolean isDead;
     public Sprite bodySprite, wheelSprite1,wheelSprite2;
     public float timer;
-    private float speed;
+    private float speed, startTimer = 0f;
 
     public  Player1(World _world, FixtureDef _carBodyFDef, FixtureDef _wheelsFDef, float x , float y , float width, float height)
     {
@@ -112,15 +107,26 @@ public class Player1 extends Sprite {
         wheelSprite2.setRotation(backWheel.getAngle()* MathUtils.radiansToDegrees);
 
         System.out.println(isGround);
+
         if (!isGround)
         {
-            carBody.setAngularVelocity(gyroz * 3 - 0.5f);//-0.5 looks ok
+            carBody.setAngularVelocity(-32f * dt);
+            if (gyroz > 0.5f)
+                carBody.setAngularVelocity(-150f * dt);//-0.5 looks ok
+            if (gyroz < -0.5f)
+                carBody.setAngularVelocity(150f * dt);//-0.5 looks ok
+
         }
-        if (carBody.getLinearVelocity().x <= 3f && carBody.getLinearVelocity().x >= -3f)
-            timer -= dt;
-        //System.out.println("1 : X : " + carBody.getLinearVelocity().x);
-        if (timer <= 0f)
-            isDead = true;
+
+        if (startTimer >= 2f)
+        {
+            if (carBody.getLinearVelocity().x <= 3f && carBody.getLinearVelocity().x >= -3f)
+                timer -= dt;
+            //System.out.println("1 : X : " + carBody.getLinearVelocity().x);
+            if (timer <= 0f)
+                isDead = true;
+        }else startTimer += dt;
+
     }
 
     public void kill()

@@ -14,9 +14,7 @@ import com.mygdx.game.Sprites.Player1;
 import com.mygdx.game.Sprites.Player2;
 
 
-/**
- * Created by DIOGO-PC on 12/22/2016.
- */
+
 
 public class WorldContactListener implements ContactListener {
 
@@ -69,8 +67,7 @@ public class WorldContactListener implements ContactListener {
         if (fa.getUserData() instanceof B2WorldCreator || fb.getUserData() instanceof  B2WorldCreator)
         {
             if ((fa.getUserData().toString() == "LEFTW" || fb.getUserData().toString() == "LEFTW")
-                    ||(fa.getUserData().toString() == "RIGHTW" || fb.getUserData().toString() == "RIGHTW"
-                    || (fa.getUserData().toString() == "BODY" || fb.getUserData().toString() == "BODY"))) {
+                    ||(fa.getUserData().toString() == "RIGHTW" || fb.getUserData().toString() == "RIGHTW")) {
                 return true;
             }
         }

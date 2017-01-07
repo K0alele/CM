@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="16" tileheight="16" nextobjectid="80">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="16" tileheight="16" nextobjectid="109">
  <tileset firstgid="1" name="tileset_gutter" tilewidth="16" tileheight="16" spacing="2" margin="1" tilecount="924" columns="33">
   <image source="tileset_gutter.png" width="594" height="504"/>
  </tileset>
@@ -38,65 +38,39 @@
 </data>
  </layer>
  <objectgroup name="ground">
-  <object id="39" x="208" y="192">
-   <polygon points="0,0 32,-32 32,0"/>
+  <object id="90" x="208" y="192">
+   <polygon points="0,0 112,0 112,-16 96,-32 32,-32"/>
   </object>
-  <object id="40" x="304" y="160">
-   <polygon points="0,0 16,16 0,16"/>
+  <object id="93" x="640" y="192">
+   <polygon points="0,0 144,0 144,-96 96,-96"/>
   </object>
-  <object id="41" x="448" y="128">
-   <polygon points="0,0 0,48 -48,48"/>
+  <object id="94" x="0" y="192" width="224" height="16"/>
+  <object id="95" x="320" y="176" width="96" height="16"/>
+  <object id="96" x="400" y="176">
+   <polygon points="0,0 48,-48 112,-48 128,-32"/>
   </object>
-  <object id="42" x="512" y="128">
-   <polygon points="0,0 0,16 16,16"/>
+  <object id="97" x="528" y="144">
+   <polygon points="0,0 16,0 64,48 0,48"/>
   </object>
-  <object id="43" x="544" y="144">
-   <polygon points="0,0 0,48 48,48"/>
+  <object id="99" x="576" y="192" width="80" height="16"/>
+  <object id="100" x="784" y="96">
+   <polygon points="0,0 48,0 48,-16 32,-32"/>
   </object>
-  <object id="50" x="0" y="192" width="208" height="16"/>
-  <object id="51" x="240" y="160" width="64" height="16"/>
-  <object id="52" x="320" y="176" width="80" height="16"/>
-  <object id="53" x="448" y="128" width="64" height="16"/>
-  <object id="54" x="592" y="192" width="48" height="16"/>
-  <object id="55" x="528" y="144" width="16" height="16"/>
-  <object id="62" x="736" y="96" width="48" height="16"/>
-  <object id="63" x="880" y="32" width="32" height="16"/>
-  <object id="64" x="944" y="64" width="48" height="16"/>
-  <object id="65" x="1040" y="112" width="128" height="16"/>
-  <object id="66" x="1216" y="64" width="48" height="16"/>
-  <object id="67" x="1360" y="160" width="176" height="16"/>
-  <object id="68" x="1584" y="112" width="64" height="16"/>
-  <object id="69" x="1728" y="192" width="144" height="16"/>
-  <object id="70" x="736" y="96">
-   <polygon points="0,0 0,96 -96,96"/>
+  <object id="101" x="832" y="80">
+   <polygon points="0,0 48,-48 80,-48 112,-16"/>
   </object>
-  <object id="71" x="816" y="64">
-   <polygon points="0,0 0,32 -32,32"/>
+  <object id="102" x="944" y="64">
+   <polygon points="0,0 48,0 96,48 0,48"/>
   </object>
-  <object id="72" x="816" y="64">
-   <polygon points="0,0 0,16 16,16"/>
+  <object id="103" x="1024" y="112" width="160" height="16"/>
+  <object id="104" x="1168" y="112">
+   <polygon points="0,0 48,-48 96,-48 192,48"/>
   </object>
-  <object id="73" x="880" y="32">
-   <polygon points="0,0 0,48 -48,48"/>
+  <object id="106" x="1344" y="160" width="208" height="16"/>
+  <object id="107" x="1536" y="160">
+   <polygon points="0,0 48,-48 112,-48 192,32"/>
   </object>
-  <object id="74" x="912" y="32">
-   <polygon points="0,0 0,32 32,32"/>
-  </object>
-  <object id="75" x="992" y="64">
-   <polygon points="0,0 0,48 48,48"/>
-  </object>
-  <object id="76" x="1216" y="64">
-   <polygon points="0,0 0,48 -48,48"/>
-  </object>
-  <object id="77" x="1264" y="64">
-   <polygon points="0,0 0,96 96,96"/>
-  </object>
-  <object id="78" x="1584" y="112">
-   <polygon points="0,0 0,48 -48,48"/>
-  </object>
-  <object id="79" x="1648" y="112">
-   <polygon points="0,0 0,80 80,80"/>
-  </object>
+  <object id="108" x="1712" y="192" width="160" height="16"/>
  </objectgroup>
  <objectgroup name="Coins">
   <object id="61" x="1856" y="80" width="16" height="112"/>

@@ -1,34 +1,18 @@
 package com.mygdx.game.Screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.objects.PolygonMapObject;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Polygon;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.Contact;
-import com.badlogic.gdx.physics.box2d.ContactImpulse;
-import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.Manifold;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.utils.IntFloatMap;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Scenes.Hud;
@@ -36,10 +20,6 @@ import com.mygdx.game.Sprites.Player1;
 import com.mygdx.game.Sprites.Player2;
 import com.mygdx.game.Tools.B2WorldCreator;
 import com.mygdx.game.Tools.WorldContactListener;
-import com.sun.corba.se.impl.oa.poa.ActiveObjectMap;
-import com.sun.corba.se.spi.orbutil.fsm.Input;
-
-import java.io.Console;
 
 /**
  * Created by Diogo on 14/11/2016.
@@ -61,28 +41,33 @@ public class PlayScreen implements Screen{
     public static Player1 player1;
     public static Player2 player2;
 
-    boolean gyroscopeAvail;
-    float gyroX = 0;
-    float gyroY = 0;
-    float gyroZ = 0;
-    public PlayScreen(MyGdxGame _game)
+    private int mapId;
+    private final int MaxMapId = 2;
+
+    boolean accelAvail;
+    private float accelX;
+    private float accelY;
+    private float accelZ;
+
+    public PlayScreen(MyGdxGame _game, int _mapId)
     {
-        gyroscopeAvail = Gdx.input.isPeripheralAvailable(com.badlogic.gdx.Input.Peripheral.Gyroscope);
+        accelAvail = Gdx.input.isPeripheralAvailable(Input.Peripheral.Accelerometer);
 
         game = _game;
         gameCam = new OrthographicCamera();
         gamePort = new FitViewport(MyGdxGame.V_WIDTH/2,MyGdxGame.V_HEIGHT/2, gameCam);
         hud = new Hud(game.batch);
+
         mapLoader = new TmxMapLoader();
-        map = mapLoader.load("lvl1.tmx");
-        renderer = new OrthogonalTiledMapRenderer(map);
 
         gameCam.position.set(gamePort.getWorldWidth()/2, gamePort.getWorldHeight()/2,0);
 
         world = new World(new Vector2(0,-100),true);
         debugRenderer = new Box2DDebugRenderer();
 
-        new B2WorldCreator(world,map);
+        hud.changeLevl(_mapId, MaxMapId);
+        mapId = _mapId;
+        CreateMap(mapId);
 
         CreatePlayer();
         player2 = new Player2(world);
@@ -103,6 +88,12 @@ public class PlayScreen implements Screen{
         player1 = new Player1(world,BodyFDef,wheelsFDef,32,30,20,10);
     }
 
+    private void CreateMap(int id)
+    {
+        map = mapLoader.load("lvl"+id+".tmx");
+        renderer = new OrthogonalTiledMapRenderer(map);
+        new B2WorldCreator(world,map);
+    }
 
     @Override
     public void show() {
@@ -111,18 +102,16 @@ public class PlayScreen implements Screen{
 
     public void Update(float dt)
     {
-        if(gyroscopeAvail){
-            gyroX = Gdx.input.getGyroscopeX();
-            gyroY = Gdx.input.getGyroscopeY();
-            gyroZ = Gdx.input.getGyroscopeZ();
+        if(accelAvail){
+            accelX = Gdx.input.getAccelerometerX();
+            accelY = Gdx.input.getAccelerometerY();
+            accelZ = Gdx.input.getAccelerometerZ();
         }
 
-        //System.out.println(gyroZ);
-        //handleInput(dt);
+        //System.out.println(accelY);
+        hud.Update(mapId, MaxMapId);
 
-        hud.Update();
-
-        player1.Update(gyroZ, dt);
+        player1.Update(accelY, dt);
         player2.Update();
 
         gameCam.position.x = player1.carBody.getPosition().x;
@@ -174,7 +163,9 @@ public class PlayScreen implements Screen{
             player1.timer = 5f;
             player1.won = false;
             dispose();
-            game.setScreen(new MainMenuScreen(game));
+            if (mapId + 1 <= MaxMapId)
+                game.setScreen(new PlayScreen(game, mapId + 1));
+            else game.setScreen(new MainMenuScreen(game));
         }
         if (player1.won)
         {
@@ -182,7 +173,9 @@ public class PlayScreen implements Screen{
             player1.timer = 5f;
             player1.won = false;
             dispose();
-            game.setScreen(new MainMenuScreen(game));
+            if (mapId + 1 <= MaxMapId)
+                game.setScreen(new PlayScreen(game, mapId + 1));
+            else game.setScreen(new MainMenuScreen(game));
         }
     }
 

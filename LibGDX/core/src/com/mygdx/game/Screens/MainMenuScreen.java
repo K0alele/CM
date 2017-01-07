@@ -4,12 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGdxGame;
 
 /**
@@ -20,9 +16,6 @@ public class MainMenuScreen implements Screen {
 
     private static final int ButtonsWidth = (int)(1f/3f * Gdx.graphics.getWidth());
     private static final int ButtonsHeight = (int)(7f/30f*ButtonsWidth);
-    //private OrthographicCamera gameCam;
-
-    private Viewport gamePort;
 
     private MyGdxGame game;
     Texture TitleButton;
@@ -37,10 +30,6 @@ public class MainMenuScreen implements Screen {
         ExitButton = new Texture("EXIT.png");
         SinglePlayerButton = new Texture("SINGLEPLAYER.png");
         MultiPlayerButton = new Texture("MULTIPLAYER.png");
-
-        //gameCam = new OrthographicCamera();
-        //gamePort = new FitViewport(MyGdxGame.V_WIDTH/2,MyGdxGame.V_HEIGHT/2, gameCam);
-        //gameCam.position.set(gamePort.getWorldWidth()/2, gamePort.getWorldHeight()/2,0);
 
         Gdx.input.setInputProcessor(new InputAdapter() {
 
@@ -60,7 +49,7 @@ public class MainMenuScreen implements Screen {
                 if (textureBounds2.contains(screenX,screenY))
                 {
                     System.out.println("PLAY");
-                    game.setScreen(new PlayScreen(game));
+                    game.setScreen(new PlayScreen(game, 1));
                 }
 
                 //Play Multiplayer button
@@ -68,7 +57,7 @@ public class MainMenuScreen implements Screen {
                 if (textureBounds3.contains(screenX,screenY))
                 {
                     System.out.println("PLAY");
-                    game.setScreen(new PlayScreen(game));
+                    game.setScreen(new PlayScreen(game, 1));
                 }
 
                 // System.out.println("1 : X : " + screenX + " Y : " + screenY);
@@ -108,7 +97,7 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        //gamePort.update(width,height);
+
     }
 
     @Override
