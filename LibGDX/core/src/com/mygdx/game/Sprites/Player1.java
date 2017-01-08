@@ -1,6 +1,5 @@
 package com.mygdx.game.Sprites;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
@@ -18,11 +17,12 @@ import com.badlogic.gdx.physics.box2d.joints.WheelJointDef;
 
 public class Player1 extends Sprite {
 
+    public String id;
+    public static boolean isGround = false, won;
     public Body frontWheel, backWheel, carBody;
     public WheelJoint backJoint,frontJoint;
+    public boolean isDead;
     public Sprite bodySprite, wheelSprite1,wheelSprite2;
-    public String id;
-    public static boolean isGround = false, won, isDead;
     public float timer;
     private float speed, startTimer = 0f;
 
@@ -115,6 +115,7 @@ public class Player1 extends Sprite {
                 carBody.setAngularVelocity(-150f * dt);//-0.5 looks ok
             if (gyroz < -0.5f)
                 carBody.setAngularVelocity(150f * dt);//-0.5 looks ok
+
         }
 
         if (startTimer >= 2f)

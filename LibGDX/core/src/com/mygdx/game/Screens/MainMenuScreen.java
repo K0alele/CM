@@ -40,7 +40,6 @@ public class MainMenuScreen implements Screen {
                 Rectangle textureBounds1 = new Rectangle(Gdx.graphics.getWidth()/2 - ButtonsWidth/2, 10,ButtonsWidth,ButtonsHeight);
                 if (textureBounds1.contains(screenX, screenY))
                 {
-                    Gdx.input.vibrate(100);
                     System.out.println("EXIT");
                     Gdx.app.exit();
                 }
@@ -49,7 +48,6 @@ public class MainMenuScreen implements Screen {
                 Rectangle textureBounds2 = new Rectangle(Gdx.graphics.getWidth()/2 - ButtonsWidth/2, Gdx.graphics.getHeight()*2/4+10,ButtonsWidth,ButtonsHeight);
                 if (textureBounds2.contains(screenX,screenY))
                 {
-                    Gdx.input.vibrate(100);
                     System.out.println("PLAY");
                     game.setScreen(new PlayScreen(game, 1));
                 }
@@ -58,7 +56,6 @@ public class MainMenuScreen implements Screen {
                 Rectangle textureBounds3 = new Rectangle(Gdx.graphics.getWidth()/2 - ButtonsWidth/2, Gdx.graphics.getHeight()*1/4+10,ButtonsWidth,ButtonsHeight);
                 if (textureBounds3.contains(screenX,screenY))
                 {
-                    Gdx.input.vibrate(100);
                     System.out.println("PLAY");
                     game.setScreen(new PlayScreen(game, 1));
                 }
