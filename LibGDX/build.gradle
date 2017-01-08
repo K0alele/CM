@@ -73,9 +73,6 @@ project(":core") {
     dependencies {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
-        compile files('build/libs/android-core.jar')
-        compile files('build/libs/ketai.jar')
-        compile files('build/libs/oscP5.jar')
     }
 }
 
