@@ -159,6 +159,7 @@ public class PlayScreen implements Screen{
 
         if (player1.isDead)
         {
+            Gdx.input.vibrate(1000);
             player1.isDead = false;
             player1.timer = 5f;
             player1.won = false;
@@ -169,6 +170,7 @@ public class PlayScreen implements Screen{
         }
         if (player1.won)
         {
+            Gdx.input.vibrate(1000);
             player1.isDead = false;
             player1.timer = 5f;
             player1.won = false;
