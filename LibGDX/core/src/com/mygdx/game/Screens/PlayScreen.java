@@ -28,7 +28,7 @@ import com.mygdx.game.Tools.WorldContactListener;
 
 public class PlayScreen implements Screen{
 
-    private MyGdxGame game;
+    private static MyGdxGame game;
     private OrthographicCamera gameCam;
     private Viewport gamePort;
     private Hud hud;
@@ -42,7 +42,7 @@ public class PlayScreen implements Screen{
     public static Player1 player1;
     public static Player2 player2;
 
-    private int mapId;
+    private static int mapId;
     private final int MaxMapId = 2;
 
     boolean accelAvail;
@@ -172,7 +172,7 @@ public class PlayScreen implements Screen{
                 {
                     game.batch.dispose();
                     game.batch=new SpriteBatch();
-                    game.setScreen(new MainMenuScreen(game));
+                    game.setScreen(new MainMenuScreen(game,mapId));
                 }
             }
             if (player1.won)
@@ -187,12 +187,17 @@ public class PlayScreen implements Screen{
                     game.setScreen(new PlayScreen(game, mapId + 1));
                 else
                 {
-                    game.batch.dispose();
-                    game.batch=new SpriteBatch();
-                    game.setScreen(new MainMenuScreen(game));
+                   goToMenu();
                 }
             }
         }
+    }
+
+    public static void goToMenu()
+    {
+        game.batch.dispose();
+        game.batch=new SpriteBatch();
+        game.setScreen(new MainMenuScreen(game,mapId));
     }
 
     @Override

@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.MyGdxGame;
+import com.sun.org.apache.bcel.internal.generic.NEW;
 
 /**
  * Created by DIOGO-PC on 1/3/2017.
@@ -20,16 +21,18 @@ public class MainMenuScreen implements Screen {
     private MyGdxGame game;
     Texture TitleButton;
     Texture ExitButton;
-    Texture SinglePlayerButton;
-    Texture MultiPlayerButton;
+    Texture NewGameButton;
+    Texture ContinueButton;
+    int lvl = 1;
 
-    public MainMenuScreen(MyGdxGame _game)
+    public MainMenuScreen(MyGdxGame _game, final int _lvl)
     {
+        lvl = _lvl;
         game = _game;
         TitleButton = new Texture("TITLE.png");
         ExitButton = new Texture("EXIT.png");
-        SinglePlayerButton = new Texture("SINGLEPLAYER.png");
-        MultiPlayerButton = new Texture("MULTIPLAYER.png");
+        NewGameButton = new Texture("NEWGAME.png");
+        ContinueButton = new Texture("Continue.png");
 
         Gdx.input.setInputProcessor(new InputAdapter() {
 
@@ -62,7 +65,7 @@ public class MainMenuScreen implements Screen {
                 {
                     Gdx.input.vibrate(100);
                     System.out.println("PLAY");
-                    game.setScreen(new PlayScreen(game, 1));
+                    game.setScreen(new PlayScreen(game, lvl));
                     //PlayScreen.pontos1=0;
                     //PlayScreen.pontos2=0;
                 }
@@ -93,9 +96,9 @@ public class MainMenuScreen implements Screen {
         game.batch.draw(TitleButton,x , y,ButtonsWidth * 1.8f,ButtonsHeight * 1.8f);
         x = Gdx.graphics.getWidth()/2 - ButtonsWidth/2;
         y = Gdx.graphics.getHeight()*2/4+10;
-        game.batch.draw(SinglePlayerButton,x , y,ButtonsWidth,ButtonsHeight);
+        game.batch.draw(NewGameButton,x , y,ButtonsWidth,ButtonsHeight);
         y = Gdx.graphics.getHeight()*1/4+10;
-        game.batch.draw(MultiPlayerButton,x , y,ButtonsWidth,ButtonsHeight);
+        game.batch.draw(ContinueButton,x , y,ButtonsWidth,ButtonsHeight);
         y = 10;
         game.batch.draw(ExitButton,x , y,ButtonsWidth,ButtonsHeight);
 
@@ -126,7 +129,7 @@ public class MainMenuScreen implements Screen {
     public void dispose() {
         TitleButton.dispose();
         ExitButton.dispose();
-        SinglePlayerButton.dispose();
-        MultiPlayerButton.dispose();
+        NewGameButton.dispose();
+        ContinueButton.dispose();
     }
 }
