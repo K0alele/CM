@@ -213,5 +213,7 @@ public class PlayScreen implements Screen{
         world.dispose();
         debugRenderer.dispose();
         hud.dispose();
+        player2.dispose();
+        player1.dispose();
     }
 }
