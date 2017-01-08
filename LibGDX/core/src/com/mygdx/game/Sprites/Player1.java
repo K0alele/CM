@@ -106,7 +106,7 @@ public class Player1 extends Sprite {
         wheelSprite2.setPosition(backWheel.getPosition().x - wheelSprite2.getWidth()/2, backWheel.getPosition().y - wheelSprite2.getHeight()/2);
         wheelSprite2.setRotation(backWheel.getAngle()* MathUtils.radiansToDegrees);
 
-        System.out.println(isGround);
+        //System.out.println(isGround);
 
         if (!isGround)
         {

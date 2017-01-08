@@ -53,10 +53,13 @@ public class PlayScreen implements Screen{
     private float accelY;
     private float accelZ;
 
+    public static boolean pause;
+
     public static int pontos1, pontos2;
 
     public PlayScreen(MyGdxGame _game, int _mapId)
     {
+        pause = false;
         accelAvail = Gdx.input.isPeripheralAvailable(Input.Peripheral.Accelerometer);
 
         game = _game;
@@ -138,59 +141,63 @@ public class PlayScreen implements Screen{
     @Override
     public void render(float delta) {
 
-        Update(delta);
-
-        Gdx.gl.glClearColor(56/255f,168/255f,233/255f,1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        renderer.render();
-        debugRenderer.render(world, gameCam.combined);
-        game.batch.setProjectionMatrix(gameCam.combined);
-        game.batch.begin();
-
-        player1.wheelSprite1.draw(game.batch);
-        player1.wheelSprite2.draw(game.batch);
-        player1.bodySprite.draw(game.batch);
-
-        for (int i = 0; i < player2.data.size; i++) {
-            player2.data.getValueAt(i).draw(game.batch);
-        }
-
-        game.batch.end();
-
-        hud.stage.draw();
-
-        world.step(1f/60f, 6,2);
-
-        if (player1.isDead)
+        if (!pause)
         {
-            pontos2++;
-            Gdx.input.vibrate(1000);
-            player1.isDead = false;
-            player1.timer = 5f;
-            player1.won = false;
-            dispose();
-            //if (mapId + 1 <= MaxMapId)
-              //  game.setScreen(new PlayScreen(game, mapId + 1));
-            //else
-            {
-                resize(MyGdxGame.V_WIDTH, MyGdxGame.V_HEIGHT);
-                game.setScreen(new MainMenuScreen(game));
+            Update(delta);
+
+            Gdx.gl.glClearColor(56/255f,168/255f,233/255f,1);
+            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+            renderer.render();
+            debugRenderer.render(world, gameCam.combined);
+            game.batch.setProjectionMatrix(gameCam.combined);
+            game.batch.begin();
+
+            player1.wheelSprite1.draw(game.batch);
+            player1.wheelSprite2.draw(game.batch);
+            player1.bodySprite.draw(game.batch);
+
+            for (int i = 0; i < player2.data.size; i++) {
+                player2.data.getValueAt(i).draw(game.batch);
             }
-        }
-        if (player1.won)
-        {
-            pontos1++;
-            Gdx.input.vibrate(1000);
-            player1.isDead = false;
-            player1.timer = 5f;
-            player1.won = false;
-            dispose();
-            if (mapId + 1 <= MaxMapId)
-                game.setScreen(new PlayScreen(game, mapId + 1));
-            else
+
+            game.batch.end();
+
+            hud.stage.draw();
+
+            world.step(1f/60f, 6,2);
+
+            if (player1.isDead)
             {
-                game.setScreen(new MainMenuScreen(game));
+                pontos2++;
+                Gdx.input.vibrate(1000);
+                player1.isDead = false;
+                player1.timer = 5f;
+                player1.won = false;
+                dispose();
+                if (mapId + 1 <= MaxMapId)
+                    game.setScreen(new PlayScreen(game, mapId + 1));
+                else
+                {
+                    resize(MyGdxGame.V_WIDTH, MyGdxGame.V_HEIGHT);
+                    game.setScreen(new MainMenuScreen(game));
+                }
+            }
+            if (player1.won)
+            {
+                pontos1++;
+                Gdx.input.vibrate(1000);
+                player1.isDead = false;
+                player1.timer = 5f;
+                player1.won = false;
+                dispose();
+                if (mapId + 1 <= MaxMapId)
+                    game.setScreen(new PlayScreen(game, mapId + 1));
+                else
+                {
+                    resize(MyGdxGame.V_WIDTH, MyGdxGame.V_HEIGHT);
+                    game.setScreen(new MainMenuScreen(game));
+                }
             }
         }
     }
@@ -202,17 +209,19 @@ public class PlayScreen implements Screen{
     }
 
     @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
     public void hide() {
+
+    }
+
+    @Override
+    public void pause()
+    {
+
+    }
+
+    @Override
+    public void resume()
+    {
 
     }
 
