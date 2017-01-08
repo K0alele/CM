@@ -129,6 +129,12 @@ public class Player1 extends Sprite {
 
     }
 
+    public void dispose() {
+        bodySprite.getTexture().dispose();
+        wheelSprite1.getTexture().dispose();
+        wheelSprite2.getTexture().dispose();
+    }
+
     public void kill()
     {
         isDead = true;

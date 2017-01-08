@@ -120,4 +120,11 @@ public class Player2 extends Sprite implements InputProcessor{
     public boolean scrolled(int amount) {
         return false;
     }
+
+    public void dispose() {
+        for (int i = 0; i < data.size; i++) {
+            data.getValueAt(i).getTexture().dispose();
+        }
+        data.clear();
+    }
 }
