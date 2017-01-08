@@ -1,14 +1,11 @@
 package com.mygdx.game.Tools;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
-import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Screens.PlayScreen;
-import com.mygdx.game.Sprites.Coin;
 import com.mygdx.game.Sprites.InteractiveObject;
 import com.mygdx.game.Sprites.Player1;
 import com.mygdx.game.Sprites.Player2;

@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.MyGdxGame;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 
 /**
  * Created by DIOGO-PC on 1/3/2017.
@@ -65,7 +64,7 @@ public class MainMenuScreen implements Screen {
                 {
                     Gdx.input.vibrate(100);
                     System.out.println("PLAY");
-                    game.setScreen(new PlayScreen(game, lvl));
+                    game.setScreen(new PlayScreen(game, 1));
                     //PlayScreen.pontos1=0;
                     //PlayScreen.pontos2=0;
                 }
