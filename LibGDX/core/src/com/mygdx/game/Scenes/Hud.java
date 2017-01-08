@@ -24,12 +24,12 @@ public class Hud implements Disposable{
     private int lvl, maxlvl;
     Label TimeLabel;
     Label LevelLabel;
+    Label Score;
 
     public Hud(SpriteBatch sb)
     {
         lvl = 0;
         maxlvl = 0;
-
         viewport = new FitViewport(MyGdxGame.V_WIDTH,MyGdxGame.V_HEIGHT, new OrthographicCamera());
 
         stage = new Stage(viewport,sb);
@@ -39,10 +39,12 @@ public class Hud implements Disposable{
         table.setFillParent(true);
 
         TimeLabel = new Label(java.lang.String.format("TIME: %.2f",timeCount), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        Score = new Label(java.lang.String.format("%d - %d",PlayScreen.pontos1,PlayScreen.pontos2), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         LevelLabel = new Label("LEVEL", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
 
         table.add(TimeLabel).expandX().padTop(10);
+        table.add(Score).expandX().padTop(10);
         table.add(LevelLabel).expandX().padTop(10);
         table.row();
 
@@ -53,6 +55,7 @@ public class Hud implements Disposable{
     {
         timeCount = PlayScreen.player1.timer;
         TimeLabel.setText(java.lang.String.format("TIME: %.2f",timeCount));
+        Score.setText(java.lang.String.format("%d - %d",PlayScreen.pontos1,PlayScreen.pontos2));
         LevelLabel.setText("LEVEL : "+ lvl +" - " + maxlvl);
     }
 
