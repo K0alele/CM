@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -142,7 +143,6 @@ public class PlayScreen implements Screen{
         renderer.render();
         debugRenderer.render(world, gameCam.combined);
         game.batch.setProjectionMatrix(gameCam.combined);
-
         game.batch.begin();
 
         player1.wheelSprite1.draw(game.batch);
@@ -167,9 +167,13 @@ public class PlayScreen implements Screen{
             player1.timer = 5f;
             player1.won = false;
             dispose();
-            if (mapId + 1 <= MaxMapId)
-                game.setScreen(new PlayScreen(game, mapId + 1));
-            else game.setScreen(new MainMenuScreen(game));
+            //if (mapId + 1 <= MaxMapId)
+              //  game.setScreen(new PlayScreen(game, mapId + 1));
+            //else
+            {
+                game.batch=new SpriteBatch();
+                game.setScreen(new MainMenuScreen(game));
+            }
         }
         if (player1.won)
         {
@@ -181,7 +185,11 @@ public class PlayScreen implements Screen{
             dispose();
             if (mapId + 1 <= MaxMapId)
                 game.setScreen(new PlayScreen(game, mapId + 1));
-            else game.setScreen(new MainMenuScreen(game));
+            else
+            {
+                game.batch=new SpriteBatch();
+                game.setScreen(new MainMenuScreen(game));
+            }
         }
     }
 

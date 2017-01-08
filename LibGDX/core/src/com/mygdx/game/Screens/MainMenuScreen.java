@@ -63,6 +63,8 @@ public class MainMenuScreen implements Screen {
                     Gdx.input.vibrate(100);
                     System.out.println("PLAY");
                     game.setScreen(new PlayScreen(game, 1));
+                    PlayScreen.pontos1=0;
+                    PlayScreen.pontos2=0;
                 }
 
                 // System.out.println("1 : X : " + screenX + " Y : " + screenY);

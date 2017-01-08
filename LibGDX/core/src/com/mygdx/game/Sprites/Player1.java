@@ -96,8 +96,8 @@ public class Player1 extends Sprite {
     {
         //backWheel.applyLinearImpulse(new Vector2(1500f,0),backWheel.getWorldCenter(),true);
         //frontWheel.applyLinearImpulse(new Vector2(1500f,0),frontWheel.getWorldCenter(),true);
-        backWheel.applyAngularImpulse(-4000f * dt * speed,true);//-4000 works
-        frontWheel.applyAngularImpulse(-4000f * dt * speed,true);
+        backWheel.applyAngularImpulse(-3500f * dt * speed,true);//-4000 works
+        frontWheel.applyAngularImpulse(-3500f * dt * speed,true);
 
         bodySprite.setPosition(carBody.getPosition().x - bodySprite.getWidth()/2, carBody.getPosition().y - bodySprite.getHeight()/2);
         bodySprite.setRotation(carBody.getAngle() * MathUtils.radiansToDegrees);
