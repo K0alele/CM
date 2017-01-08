@@ -191,6 +191,11 @@ public class PlayScreen implements Screen{
                    goToMenu();
                 }
             }
+        }else
+        {
+            Gdx.gl.glClearColor(0f,0f,0f,1);
+            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+            hud.stage2.draw();
         }
     }
 

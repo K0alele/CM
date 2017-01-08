@@ -18,6 +18,7 @@ import com.mygdx.game.Screens.PlayScreen;
 public class Hud implements Disposable{
 
     public Stage stage;
+    public Stage stage2;
     private Viewport viewport;
 
     private float timeCount;
@@ -25,6 +26,7 @@ public class Hud implements Disposable{
     Label TimeLabel;
     Label LevelLabel;
     Label Score;
+    Label Paused;
 
     public Hud(SpriteBatch sb)
     {
@@ -33,14 +35,21 @@ public class Hud implements Disposable{
         viewport = new FitViewport(MyGdxGame.V_WIDTH,MyGdxGame.V_HEIGHT, new OrthographicCamera());
 
         stage = new Stage(viewport,sb);
+        stage2 = new Stage(viewport, sb);
 
         Table table = new Table();
+        Table table2 = new Table();
         table.top();
         table.setFillParent(true);
 
         TimeLabel = new Label(java.lang.String.format("TIME: %.2f",timeCount), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         Score = new Label(java.lang.String.format("%d - %d",PlayScreen.pontos1,PlayScreen.pontos2), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         LevelLabel = new Label("LEVEL", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        Paused = new Label("PAUSED", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+
+        table2.add(Paused).expandX().padLeft(400).padBottom(100);
+
+        stage2.addActor(table2);
 
 
         table.add(TimeLabel).expandX().padTop(10);
