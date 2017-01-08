@@ -13,6 +13,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGdxGame;
@@ -43,7 +44,7 @@ public class PlayScreen implements Screen{
     public static Player2 player2;
 
     private static int mapId;
-    private final int MaxMapId = 2;
+    private final int MaxMapId = 3;
 
     boolean accelAvail;
     private float accelX;
@@ -61,7 +62,7 @@ public class PlayScreen implements Screen{
 
         game = _game;
         gameCam = new OrthographicCamera();
-        gamePort = new StretchViewport(MyGdxGame.V_WIDTH/2,MyGdxGame.V_HEIGHT/2, gameCam);
+        gamePort = new FitViewport(MyGdxGame.V_WIDTH/2,MyGdxGame.V_HEIGHT/2, gameCam);
         hud = new Hud(game.batch);
 
         mapLoader = new TmxMapLoader();
@@ -161,7 +162,7 @@ public class PlayScreen implements Screen{
             if (player1.isDead)
             {
                 pontos2++;
-                Gdx.input.vibrate(1000);
+                Gdx.input.vibrate(500);
                 player1.isDead = false;
                 player1.timer = 5f;
                 player1.won = false;
@@ -178,7 +179,7 @@ public class PlayScreen implements Screen{
             if (player1.won)
             {
                 pontos1++;
-                Gdx.input.vibrate(1000);
+                Gdx.input.vibrate(500);
                 player1.isDead = false;
                 player1.timer = 5f;
                 player1.won = false;
@@ -196,7 +197,7 @@ public class PlayScreen implements Screen{
     public static void goToMenu()
     {
         game.batch.dispose();
-        game.batch=new SpriteBatch();
+        game.batch = new SpriteBatch();
         game.setScreen(new MainMenuScreen(game,mapId));
     }
 
