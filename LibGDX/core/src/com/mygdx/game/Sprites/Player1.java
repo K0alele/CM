@@ -86,12 +86,6 @@ public class Player1 extends Sprite {
         frontJoint = (WheelJoint)_world.createJoint(wheelJointDef);
     }
 
-    public void Hit()
-    {
-        System.out.println(id + " : I have been hit!!");
-        carBody.applyAngularImpulse((float) Math.PI, true);
-    }
-
     public void Update(float gyroz, float dt)
     {
         //backWheel.applyLinearImpulse(new Vector2(1500f,0),backWheel.getWorldCenter(),true);
