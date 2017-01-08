@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -13,7 +14,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Scenes.Hud;
@@ -171,7 +174,7 @@ public class PlayScreen implements Screen{
               //  game.setScreen(new PlayScreen(game, mapId + 1));
             //else
             {
-                game.batch=new SpriteBatch();
+                resize(MyGdxGame.V_WIDTH, MyGdxGame.V_HEIGHT);
                 game.setScreen(new MainMenuScreen(game));
             }
         }
@@ -187,7 +190,6 @@ public class PlayScreen implements Screen{
                 game.setScreen(new PlayScreen(game, mapId + 1));
             else
             {
-                game.batch=new SpriteBatch();
                 game.setScreen(new MainMenuScreen(game));
             }
         }

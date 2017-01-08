@@ -56,7 +56,7 @@ public class Hud implements Disposable{
         timeCount = PlayScreen.player1.timer;
         TimeLabel.setText(java.lang.String.format("TIME: %.2f",timeCount));
         Score.setText(java.lang.String.format("%d - %d",PlayScreen.pontos1,PlayScreen.pontos2));
-        LevelLabel.setText("LEVEL : "+ lvl +" - " + maxlvl);
+        LevelLabel.setText("LEVEL : "+ lvl +" / " + maxlvl);
     }
 
     public void changeLevl(int _lvl, int _maxlvl)
